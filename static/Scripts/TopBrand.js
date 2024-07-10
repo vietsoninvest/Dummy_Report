@@ -40,7 +40,13 @@ function updateTopBrandChart(data) {
         },
         tooltip: {
             trigger: 'item',
-            formatter: '{a} <br/>{b} : {c} ({d}%)'
+            formatter: function(params) {
+                const formattedValue = new Intl.NumberFormat('en-US', {
+                    style: 'currency',
+                    currency: 'USD'
+                }).format(params.value);
+                return `${params.seriesName} <br/>${params.name}: ${formattedValue} (${params.percent}%)`;
+            }
         },
         legend: {
             left: 'center',
