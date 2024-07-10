@@ -55,7 +55,11 @@ function updateLineChart(data, selectedOutlets) {
                 params.sort((a, b) => b.value - a.value); // Sort params by value in descending order
                 let result = params[0].name + '<br/>';
                 params.forEach(function (item) {
-                    result += item.marker + ' ' + item.seriesName + ': ' + item.value.toFixed(2) + '<br/>';
+                    const formattedValue = new Intl.NumberFormat('en-US',{
+                        style: 'currency',
+                        currency: 'AUD'
+                    }).format(item.value);    
+                    result += item.marker + ' ' + item.seriesName + ': ' + formattedValue + '<br/>';
                 });
                 return result;
             }

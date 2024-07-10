@@ -60,7 +60,19 @@ function updatePlatformChart(data) {
             formatter: function(params) {
                 const index = params[0].dataIndex;
                 const total = totalRevenue[index] || totalOverallRevenue;
-                return `${params[0].name}<br/>Online: ${onlinePercentage[index]}% (${onlineData[index].toFixed(2)})<br/>Offline: ${offlinePercentage[index]}% (${offlineData[index].toFixed(2)})`;
+                const formattedTotal = new Intl.NumberFormat('en-US',{
+                    style:'currency',
+                    currency:'AUD'
+                }).format(total)
+                const formattedOnline = new Intl.NumberFormat('en-US',{
+                    style:'currency',
+                    currency:'AUD'
+                }).format(onlineData[index])
+                const formattedOffline = new Intl.NumberFormat('en-US',{
+                    style:'currency',
+                    currency:'AUD'
+                }).format(offlineData[index])
+                return `${params[0].name}<br/>Online: ${onlinePercentage[index]}% (${formattedOnline})<br/>Offline: ${offlinePercentage[index]}% (${formattedOffline})`;
             }
         },
         legend: {

@@ -2,6 +2,7 @@ console.log("Starting SalesPie.js...");
 
 function updatePieChart(data, selectedOutlets) {
     const pieChart = echarts.init(document.getElementById('pie-chart'));
+    
     const outletSales = selectedOutlets.map(outlet => {
         return {
             name: outlet,
@@ -10,15 +11,26 @@ function updatePieChart(data, selectedOutlets) {
         };
     });
 
+    // Calculate the total revenue
+    const totalRevenue = outletSales.reduce((sum, outlet) => sum + outlet.value, 0);
+
+    // Format the total revenue as "$xxx,xxx.00"
+    const formattedTotalRevenue = totalRevenue.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
+
     const pieOption = {
         title: {
             text: 'Sales Contribution by Outlet',
+            subtext: `Total Revenue: ${formattedTotalRevenue}`,
             left: 'center'
         },
         tooltip: {
             trigger: 'item',
             formatter: function (params) {
-                return `${params.seriesName} <br/>${params.name}: ${params.value.toFixed(2)} (${params.percent}%)`;
+                const formattedValue = new Intl.NumberFormat('en-US',{
+                    style: 'currency',
+                    currency: 'AUD'
+                }).format(params.value)
+                return `${params.seriesName} <br/>${params.name}: ${formattedValue} (${params.percent}%)`;
             }
         },
         legend: {
