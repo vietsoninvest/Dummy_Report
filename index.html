@@ -100,50 +100,26 @@
 
     <script>
         console.log("Starting main script...");
-        // List of JSON files to fetch (one for each month)
-        const jsonFiles = [
-        './Json/2021/data_month_4.json',
-            './Json/2021/data_month_5.json',
-            './Json/2021/data_month_6.json',
-            './Json/2021/data_month_7.json',
-            './Json/2021/data_month_8.json',
-            './Json/2021/data_month_9.json',
-            './Json/2021/data_month_10.json',
-            './Json/2021/data_month_11.json',
-            './Json/2021/data_month_12.json',
-            './Json/2022/data_month_1.json',
-            './Json/2022/data_month_2.json',
-            './Json/2022/data_month_3.json',
-            './Json/2022/data_month_4.json',
-            './Json/2022/data_month_5.json',
-            './Json/2022/data_month_6.json',
-            './Json/2022/data_month_7.json',
-            './Json/2022/data_month_8.json',
-            './Json/2022/data_month_9.json',
-            './Json/2022/data_month_10.json',
-            './Json/2022/data_month_11.json',
-            './Json/2022/data_month_12.json',
-            './Json/2023/data_month_1.json',
-            './Json/2023/data_month_2.json',
-            './Json/2023/data_month_3.json',
-            './Json/2023/data_month_4.json',
-            './Json/2023/data_month_5.json',
-            './Json/2023/data_month_6.json',
-            './Json/2023/data_month_7.json',
-            './Json/2023/data_month_8.json',
-            './Json/2023/data_month_9.json',
-            './Json/2023/data_month_10.json',
-            './Json/2023/data_month_11.json',
-            './Json/2023/data_month_12.json',
-            './Json/2024/data_month_1.json',
-            './Json/2024/data_month_2.json',
-            './Json/2024/data_month_3.json',
-            './Json/2024/data_month_4.json',
-            './Json/2024/data_month_5.json',
-            './Json/2024/data_month_6.json',
-            './Json/2024/data_month_7.json',
-            './Json/2024/data_month_8.json'
-        ];
+        // Define the starting year and month
+        const startYear = 2021;
+        const startMonth = 1;
+        const endMonth = 12;
+
+        // Get the current year dynamically
+        const currentYear = new Date().getFullYear();
+
+        // Generate the list of JSON files dynamically up to the current year
+        const jsonFiles = [];
+
+        for (let year = startYear; year <= currentYear; year++) {
+            for (let month = startMonth; month <= endMonth; month++) {
+                // Pad month with leading zero if needed
+                const monthStr = month.toString().padStart(2, '0');
+                const filePath = `./Json/${year}/data_month_${month}.json`;
+                jsonFiles.push(filePath);
+            }
+        }
+        console.log("Generated JSON file paths: ", jsonFiles);
 
         // Function to fetch all JSON files and combine the data
         async function fetchData() {
