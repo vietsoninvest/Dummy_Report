@@ -4,8 +4,54 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Acme De La Vie Sales Dashboard</title>
+
+    <!-- Echarts script -->
     <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+
+    <!-- Password script -->
+    <script>
+        function getHashCode(str, caseSensitive) {
+            if (!caseSensitive) {
+                str = str.toLowerCase();
+            }
+            var hash = 1315423911, i, ch;
+            for (i = str.length - 1; i >= 0; i--) {
+                ch = str.charCodeAt(i);
+                hash ^= ((hash << 5) + ch + (hash >> 2));
+            }
+            return (hash & 0x7FFFFFFF);
+        }
+
+        function password() {
+            var sword;
+            var logTimes = 0;
+            var correctHash = "881896371"; 
+            
+            while (sword != correctHash && logTimes != 3) { 
+                sword = prompt("Please input the password");
+                if (sword == null) {
+                    location.href = 'about:blank';
+                }
+                sword = getHashCode(sword);
+                console.log("Input password hash: " + sword);
+                if (sword != correctHash) {
+                    alert("Password wrong");
+                }
+                logTimes++;
+                console.log("Attempt times: " + logTimes);
+            }
+            if (logTimes >= 3) {
+                alert("Attempted too many times, locked");
+                location.href = 'about:blank';
+            } else {
+                alert("Logged in");
+                document.title = 'Acme De La Vie Sales Dashboard';
+            }
+        }
+        password();
+    </script>
+
     <style>
         body {
             font-family: Arial, sans-serif;
