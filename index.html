@@ -167,7 +167,7 @@
                     console.log("Data received: ", data);   
 
                     // Find the most recent date from the data
-                    const latestDate = new Date(Math.max(...data.map(item => new Date(item.Date))));
+                    const latestDate = new Date(Math.max(...data.map(item => new Date(item.Date).getTime())));
 
                     // Format the date as "Updated until: Month Day, Year"
                     const options = { year: 'numeric', month: 'long', day: 'numeric' };
@@ -338,6 +338,6 @@
                 });
 
             console.log("Main script executed...");
-        </script>
+        </script>   
     </body>
     </html>
