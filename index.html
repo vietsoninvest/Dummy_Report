@@ -144,26 +144,39 @@
             console.log("Generated JSON file paths: ", jsonFiles);
 
             // Function to fetch all JSON files and combine the data
-            async function fetchData() {
+
+            async function fetchDataInBatches(batchSize = 10) {
                 let combinedData = [];
-                for (const file of jsonFiles) {
-                    try{
-                        const response = await fetch(file);
-                        if (!response.ok) {
-                        throw new Error(`Failed to fetch ${file}: ${response.statusText}`);
-                        
+                for (let i = 0; i < jsonFiles.length; i += batchSize) {
+                    const batch = jsonFiles.slice(i, i + batchSize);
+                    const batchPromises = batch.map(file => 
+                        fetch(file)
+                            .then(response => {
+                                if (!response.ok) {
+                                    throw new Error(`Failed to fetch ${file}: ${response.statusText}`);
+                                }
+                                return response.json();
+                            })
+                            .catch(error => console.error(`Error fetching ${file}:`, error))
+                    );
+        
+                    try {
+                        const batchResults = await Promise.all(batchPromises);
+                        batchResults.forEach(data => {
+                            combinedData = combinedData.concat(data);
+                        });
+                        console.log(`Processed ${combinedData.length} records so far...`);
+                    } catch (error) {
+                        console.error(`Error processing batch: `, error);
+                        break; // Break out if an error occurs
                     }
-                    const data = await response.json();
-                    combinedData = combinedData.concat(data);
-                }catch(error) {
-                    console.error('Error fetching ${file}:', error.message);
                 }
-            }    
-            return combinedData;
-        }
+                return combinedData;
+            }
 
             // Fetch and process the data
-            fetchData().then(data => {
+            fetchDataInBatches(10)
+                .then(data => {
                     console.log("Data received: ", data);              
                     // Function to find the most recent date without using map and Math.max
                     function findMostRecentDate(data) {
