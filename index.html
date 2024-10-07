@@ -180,42 +180,26 @@
                     console.log("Data received: ", data);              
 
                     // Function to find the most recent date
-                    function findMostRecentDate(data) {
-                        if (!data || data.length === 0) {
-                            console.error("Error: Data array is empty or invalid.");
-                            return null; 
-                        }
-
-                        let latestDate = null;
-                        for (let i = 0; i < data.length; i++) {
-                            const currentItem = data[i];
-
-                            if (!currentItem || !currentItem.Date) {
-                                console.warn(`Skipping invalid entry at index ${i}: Missing or invalid Date`);
-                                continue; 
-                            }
-
-                            const currentDate = new Date(currentItem.Date);
-                            if (isNaN(currentDate)) {
-                                console.warn(`Skipping invalid date at index ${i}: ${currentItem.Date}`);
-                                continue; 
-                            }
-
-                            if (!latestDate || currentDate > latestDate) {
-                                latestDate = currentDate;
-                            }
-                        }
-
-                        return latestDate;
-                    }
-                    // Use the function to find the most recent date
                     const latestDate = findMostRecentDate(data);
-                    // Format the date as "Updated until: Month Day, Year"
-                    const options = { year: 'numeric', month: 'long', day: 'numeric' };
-                    const formattedDate = latestDate.toLocaleDateString(undefined, options);
 
-                    // Update the "Updated until" indicator
-                    document.getElementById('update-indicator').textContent = `Updated until: ${formattedDate}`;
+                    if (!latestDate) {
+                        console.error("No valid date found. Skipping date update.");
+                    } else {
+                        // Format and update the "Updated until" indicator as before
+                        const options = { year: 'numeric', month: 'long', day: 'numeric' };
+                        const formattedDate = latestDate.toLocaleDateString(undefined, options);
+                        document.getElementById('update-indicator').textContent = `Updated until: ${formattedDate}`;
+                    }
+
+                    // Filter out invalid entries that are missing required fields
+                    const validData = data.filter(item => item && item.Date && item.Outlet && item.Brand);
+
+                    // Safeguard if no valid entries are found
+                    if (validData.length === 0) {
+                        console.error("No valid data found. Skipping further processing.");
+                        return;
+                    }
+
 
                     const years = [...new Set(data.map(item => new Date(item.Date).getFullYear()))];
                     const months = [...new Set(data.map(item => new Date(item.Date).getMonth() + 1))];
