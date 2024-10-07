@@ -164,11 +164,21 @@
 
             // Fetch and process the data
             fetchData().then(data => {
-                    console.log("Data received: ", data);   
+                    console.log("Data received: ", data);              
+                    // Function to find the most recent date without using map and Math.max
+                    function findMostRecentDate(data) {
+                        let latestDate = new Date(data[0].Date); // Start with the first date
+                        for (let i = 1; i < data.length; i++) {
+                            const currentDate = new Date(data[i].Date);
+                            if (currentDate > latestDate) {
+                                latestDate = currentDate;
+                            }
+                        }
+                        return latestDate;
+                    }
 
-                    // Find the most recent date from the data
-                    const latestDate = new Date(Math.max(...data.map(item => new Date(item.Date).getTime())));
-
+                    // Use the function to find the most recent date
+                    const latestDate = findMostRecentDate(data);
                     // Format the date as "Updated until: Month Day, Year"
                     const options = { year: 'numeric', month: 'long', day: 'numeric' };
                     const formattedDate = latestDate.toLocaleDateString(undefined, options);
