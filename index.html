@@ -178,18 +178,36 @@
             fetchDataInBatches(10)
                 .then(data => {
                     console.log("Data received: ", data);              
-                    // Function to find the most recent date without using map and Math.max
+
+                    // Function to find the most recent date
                     function findMostRecentDate(data) {
-                        let latestDate = new Date(data[0].Date); // Start with the first date
-                        for (let i = 1; i < data.length; i++) {
-                            const currentDate = new Date(data[i].Date);
-                            if (currentDate > latestDate) {
+                        if (!data || data.length === 0) {
+                            console.error("Error: Data array is empty or invalid.");
+                            return null; 
+                        }
+
+                        let latestDate = null;
+                        for (let i = 0; i < data.length; i++) {
+                            const currentItem = data[i];
+
+                            if (!currentItem || !currentItem.Date) {
+                                console.warn(`Skipping invalid entry at index ${i}: Missing or invalid Date`);
+                                continue; 
+                            }
+
+                            const currentDate = new Date(currentItem.Date);
+                            if (isNaN(currentDate)) {
+                                console.warn(`Skipping invalid date at index ${i}: ${currentItem.Date}`);
+                                continue; 
+                            }
+
+                            if (!latestDate || currentDate > latestDate) {
                                 latestDate = currentDate;
                             }
                         }
+
                         return latestDate;
                     }
-
                     // Use the function to find the most recent date
                     const latestDate = findMostRecentDate(data);
                     // Format the date as "Updated until: Month Day, Year"
