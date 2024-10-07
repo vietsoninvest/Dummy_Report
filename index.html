@@ -143,6 +143,37 @@
             }
             console.log("Generated JSON file paths: ", jsonFiles);
 
+            // Define findMostRecentDate function 
+            function findMostRecentDate(data) {
+                if (!data || data.length === 0) {
+                    console.error("Error: Data array is empty or invalid.");
+                    return null; // Safeguard against empty data
+                }
+
+                let latestDate = null;
+                for (let i = 0; i < data.length; i++) {
+                    const currentItem = data[i];
+
+                    // Check if the item exists and has a valid Date property
+                    if (!currentItem || !currentItem.Date) {
+                        console.warn(`Skipping invalid entry at index ${i}: Missing or invalid Date`);
+                        continue; // Skip invalid entries
+                    }
+
+                    const currentDate = new Date(currentItem.Date);
+                    if (isNaN(currentDate)) {
+                        console.warn(`Skipping invalid date at index ${i}: ${currentItem.Date}`);
+                        continue; // Skip entries with invalid date format
+                    }
+
+                    if (!latestDate || currentDate > latestDate) {
+                        latestDate = currentDate;
+                    }
+                }
+
+                return latestDate;
+            }
+
             // Function to fetch all JSON files and combine the data
 
             async function fetchDataInBatches(batchSize = 10) {
