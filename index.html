@@ -1,330 +1,343 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Acme De La Vie Sales Dashboard</title>
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Acme De La Vie Sales Dashboard</title>
 
-    <!-- Echarts script -->
-    <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+        <!-- Echarts script -->
+        <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 
-    <!-- Password script -->
-    <script>
-        function getHashCode(str, caseSensitive) {
-            if (!caseSensitive) {
-                str = str.toLowerCase();
-            }
-            var hash = 1315423911, i, ch;
-            for (i = str.length - 1; i >= 0; i--) {
-                ch = str.charCodeAt(i);
-                hash ^= ((hash << 5) + ch + (hash >> 2));
-            }
-            return (hash & 0x7FFFFFFF);
-        }
-
-        (function(_0x1d6159,_0x28e8c8){var _0x1d155e=_0x5504,_0xa58c54=_0x1d6159();while(!![]){try{var _0x20d7b7=parseInt(_0x1d155e(0x1b7))/0x1*(parseInt(_0x1d155e(0x1b6))/0x2)+parseInt(_0x1d155e(0x1b0))/0x3+-parseInt(_0x1d155e(0x1ad))/0x4*(parseInt(_0x1d155e(0x1a9))/0x5)+-parseInt(_0x1d155e(0x1af))/0x6+parseInt(_0x1d155e(0x1aa))/0x7+parseInt(_0x1d155e(0x1b3))/0x8+-parseInt(_0x1d155e(0x1ab))/0x9*(-parseInt(_0x1d155e(0x1b9))/0xa);if(_0x20d7b7===_0x28e8c8)break;else _0xa58c54['push'](_0xa58c54['shift']());}catch(_0x1e74a6){_0xa58c54['push'](_0xa58c54['shift']());}}}(_0x1b50,0x63d37));function password(){var _0x1542c0=_0x5504,_0x448516,_0xde47a4=0x0,_0xae0395=_0x1542c0(0x1b5);while(_0x448516!=_0xae0395&&_0xde47a4!=0x3){_0x448516=prompt('Please\x20input\x20the\x20password'),_0x448516==null&&(location[_0x1542c0(0x1b4)]=_0x1542c0(0x1a7)),_0x448516=getHashCode(_0x448516),console[_0x1542c0(0x1b2)](_0x1542c0(0x1b1)+_0x448516),_0x448516!=_0xae0395&&alert(_0x1542c0(0x1ac)),_0xde47a4++,console[_0x1542c0(0x1b2)]('Attempt\x20times:\x20'+_0xde47a4);}_0xde47a4>=0x3?(alert(_0x1542c0(0x1a8)),location['href']=_0x1542c0(0x1a7)):(alert(_0x1542c0(0x1b8)),document[_0x1542c0(0x1ae)]='Acme\x20De\x20La\x20Vie\x20Sales\x20Dashboard');}function _0x1b50(){var _0x36041a=['42825BtYmzz','Input\x20password\x20hash:\x20','log','831480nJjRmA','href','881896371','662ciEcTF','2189uxJEVZ','Logged\x20in','4059170YJLaqa','about:blank','Attempted\x20too\x20many\x20times,\x20locked','6595oMNJRf','2693362FjJglz','9JyfBFj','Password\x20wrong','2320McpvZY','title','2757270AflUhH'];_0x1b50=function(){return _0x36041a;};return _0x1b50();}function _0x5504(_0x1fadef,_0x320c70){var _0x1b5014=_0x1b50();return _0x5504=function(_0x550473,_0x272797){_0x550473=_0x550473-0x1a7;var _0x272ae0=_0x1b5014[_0x550473];return _0x272ae0;},_0x5504(_0x1fadef,_0x320c70);}password();    </script>
-
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-        }
-        .header {
-            text-align: center;
-            padding: 20px;
-            background: #f8f8f8;
-            font-size: 24px;
-            font-weight: bold;
-        }
-        .container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-around;
-            margin: 20px;
-        }
-        .chart-container {
-            width: 45%;
-            height: 400px;
-            margin: 20px 0;
-        }
-        .slicer-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-around;
-            margin: 20px 0;
-        }
-        .slicer-container .dropdown {
-            margin: 5px;
-        }
-    </style>
-</head>
-<body>
-    <div class="header">Acme De La Vie Sales Dashboard</div>
-    
-    <div class="slicer-container">
-        <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="outletDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Select Outlet
-            </button>
-            <div class="dropdown-menu" aria-labelledby="outletDropdown">
-                <!-- Outlet options will be populated here by JavaScript -->
-            </div>
-        </div>
-        <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="monthDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Select Month
-            </button>
-            <div class="dropdown-menu" aria-labelledby="monthDropdown">
-                <!-- Month options will be populated here by JavaScript -->
-            </div>
-        </div>
-        <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="yearDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Select Year
-            </button>
-            <div class="dropdown-menu" aria-labelledby="yearDropdown">
-                <!-- Year options will be populated here by JavaScript -->
-            </div>
-        </div>
-        <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="brandDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Select Brand
-            </button>
-            <div class="dropdown-menu" aria-labelledby="brandDropdown">
-                <!-- Brand options will be populated here by JavaScript -->
-            </div>
-        </div>
-        <button class="btn btn-danger" id="resetButton">Reset</button>
-    </div>
-
-    <div class="container">
-        <div id="pie-chart" class="chart-container"></div>
-        <div id="line-chart" class="chart-container"></div>
-        <div id="category-by-revenue-chart" class="chart-container"></div>
-        <div id="category-by-qty-chart" class="chart-container"></div>
-        <div id="top-brand-chart" class="chart-container"></div>
-        <div id="platform-chart" class="chart-container"></div>
-
-    </div>
-
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-    <script src="./static/Scripts/SalesPie.js"></script>
-    <script src="./static/Scripts/SalesLine.js"></script>
-    <script src="./static/Scripts/CategoryByRevenue.js"></script>
-    <script src="./static/Scripts/CategoryByQty.js"></script>
-    <script src="./static/Scripts/TopBrand.js"></script>
-    <script src="./static/Scripts/Platform.js"></script>
-
-    <script>
-        console.log("Starting main script...");
-        // Define the starting year and month
-        const startYear = 2021;
-        const startMonth = 1;
-        const endMonth = 12;
-
-        // Get the current year dynamically
-        const currentYear = new Date().getFullYear();
-
-        // Generate the list of JSON files dynamically up to the current year
-        const jsonFiles = [];
-
-        for (let year = startYear; year <= currentYear; year++) {
-            for (let month = startMonth; month <= endMonth; month++) {
-                // Pad month with leading zero if needed
-                const monthStr = month.toString().padStart(2, '0');
-                const filePath = `./Json/${year}/data_month_${month}.json`;
-                jsonFiles.push(filePath);
-            }
-        }
-        console.log("Generated JSON file paths: ", jsonFiles);
-
-        // Function to fetch all JSON files and combine the data
-        async function fetchData() {
-            let combinedData = [];
-            for (const file of jsonFiles) {
-                try{
-                    const response = await fetch(file);
-                    if (!response.ok) {
-                    throw new Error(`Failed to fetch ${file}: ${response.statusText}`);
-                    
+        <!-- Password script -->
+        <script>
+            function getHashCode(str, caseSensitive) {
+                if (!caseSensitive) {
+                    str = str.toLowerCase();
                 }
-                const data = await response.json();
-                combinedData = combinedData.concat(data);
-            }catch(error) {
-                console.error('Error fetching ${file}:', error.message);
+                var hash = 1315423911, i, ch;
+                for (i = str.length - 1; i >= 0; i--) {
+                    ch = str.charCodeAt(i);
+                    hash ^= ((hash << 5) + ch + (hash >> 2));
+                }
+                return (hash & 0x7FFFFFFF);
             }
-        }    
-        return combinedData;
-    }
 
-        // Fetch and process the data
-        fetchData().then(data => {
-                console.log("Data received: ", data);   
+            (function(_0x1d6159,_0x28e8c8){var _0x1d155e=_0x5504,_0xa58c54=_0x1d6159();while(!![]){try{var _0x20d7b7=parseInt(_0x1d155e(0x1b7))/0x1*(parseInt(_0x1d155e(0x1b6))/0x2)+parseInt(_0x1d155e(0x1b0))/0x3+-parseInt(_0x1d155e(0x1ad))/0x4*(parseInt(_0x1d155e(0x1a9))/0x5)+-parseInt(_0x1d155e(0x1af))/0x6+parseInt(_0x1d155e(0x1aa))/0x7+parseInt(_0x1d155e(0x1b3))/0x8+-parseInt(_0x1d155e(0x1ab))/0x9*(-parseInt(_0x1d155e(0x1b9))/0xa);if(_0x20d7b7===_0x28e8c8)break;else _0xa58c54['push'](_0xa58c54['shift']());}catch(_0x1e74a6){_0xa58c54['push'](_0xa58c54['shift']());}}}(_0x1b50,0x63d37));function password(){var _0x1542c0=_0x5504,_0x448516,_0xde47a4=0x0,_0xae0395=_0x1542c0(0x1b5);while(_0x448516!=_0xae0395&&_0xde47a4!=0x3){_0x448516=prompt('Please\x20input\x20the\x20password'),_0x448516==null&&(location[_0x1542c0(0x1b4)]=_0x1542c0(0x1a7)),_0x448516=getHashCode(_0x448516),console[_0x1542c0(0x1b2)](_0x1542c0(0x1b1)+_0x448516),_0x448516!=_0xae0395&&alert(_0x1542c0(0x1ac)),_0xde47a4++,console[_0x1542c0(0x1b2)]('Attempt\x20times:\x20'+_0xde47a4);}_0xde47a4>=0x3?(alert(_0x1542c0(0x1a8)),location['href']=_0x1542c0(0x1a7)):(alert(_0x1542c0(0x1b8)),document[_0x1542c0(0x1ae)]='Acme\x20De\x20La\x20Vie\x20Sales\x20Dashboard');}function _0x1b50(){var _0x36041a=['42825BtYmzz','Input\x20password\x20hash:\x20','log','831480nJjRmA','href','881896371','662ciEcTF','2189uxJEVZ','Logged\x20in','4059170YJLaqa','about:blank','Attempted\x20too\x20many\x20times,\x20locked','6595oMNJRf','2693362FjJglz','9JyfBFj','Password\x20wrong','2320McpvZY','title','2757270AflUhH'];_0x1b50=function(){return _0x36041a;};return _0x1b50();}function _0x5504(_0x1fadef,_0x320c70){var _0x1b5014=_0x1b50();return _0x5504=function(_0x550473,_0x272797){_0x550473=_0x550473-0x1a7;var _0x272ae0=_0x1b5014[_0x550473];return _0x272ae0;},_0x5504(_0x1fadef,_0x320c70);}password();    </script>
 
-                const years = [...new Set(data.map(item => new Date(item.Date).getFullYear()))];
-                const months = [...new Set(data.map(item => new Date(item.Date).getMonth() + 1))];
-                const outlets = [...new Set(data.map(item => item.Outlet))];
-                const brands = [...new Set(data.map(item => item.Brand))];
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+            }
+            .header {
+                text-align: center;
+                padding: 20px;
+                background: #f8f8f8;
+                font-size: 24px;
+                font-weight: bold;
+            }
+            .container {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-around;
+                margin: 20px;
+            }
+            .chart-container {
+                width: 45%;
+                height: 400px;
+                margin: 20px 0;
+            }
+            .slicer-container {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-around;
+                margin: 20px 0;
+            }
+            .slicer-container .dropdown {
+                margin: 5px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="header">
+            Acme De La Vie Sales Dashboard
+            <div id="update-indicator" style="font-size: 14px; color: gray; margin-top: 5px;"></div>
+        </div>
+        
+        <div class="slicer-container">
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="outletDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Select Outlet
+                </button>
+                <div class="dropdown-menu" aria-labelledby="outletDropdown">
+                    <!-- Outlet options will be populated here by JavaScript -->
+                </div>
+            </div>
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="monthDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Select Month
+                </button>
+                <div class="dropdown-menu" aria-labelledby="monthDropdown">
+                    <!-- Month options will be populated here by JavaScript -->
+                </div>
+            </div>
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="yearDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Select Year
+                </button>
+                <div class="dropdown-menu" aria-labelledby="yearDropdown">
+                    <!-- Year options will be populated here by JavaScript -->
+                </div>
+            </div>
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="brandDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Select Brand
+                </button>
+                <div class="dropdown-menu" aria-labelledby="brandDropdown">
+                    <!-- Brand options will be populated here by JavaScript -->
+                </div>
+            </div>
+            <button class="btn btn-danger" id="resetButton">Reset</button>
+        </div>
 
-                const yearDropdown = document.getElementById('yearDropdown');
-                const monthDropdown = document.getElementById('monthDropdown');
-                const outletDropdown = document.getElementById('outletDropdown');
-                const brandDropdown = document.getElementById('brandDropdown');
+        <div class="container">
+            <div id="pie-chart" class="chart-container"></div>
+            <div id="line-chart" class="chart-container"></div>
+            <div id="category-by-revenue-chart" class="chart-container"></div>
+            <div id="category-by-qty-chart" class="chart-container"></div>
+            <div id="top-brand-chart" class="chart-container"></div>
+            <div id="platform-chart" class="chart-container"></div>
 
-                // Populate year dropdown
-                yearDropdown.nextElementSibling.innerHTML = '';
-                years.forEach(year => {
-                    const option = document.createElement('a');
-                    option.className = 'dropdown-item';
-                    option.href = '#';
-                    option.textContent = year;
-                    yearDropdown.nextElementSibling.appendChild(option);
-                });
-                // Set default year to 2024
-                if (years.includes(2024)) {
-                    const defaultYear = Array.from(yearDropdown.nextElementSibling.children).find(option => option.textContent === '2024');
-                    if (defaultYear) {
-                        defaultYear.classList.add('active');
+        </div>
+
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+        <script src="./static/Scripts/SalesPie.js"></script>
+        <script src="./static/Scripts/SalesLine.js"></script>
+        <script src="./static/Scripts/CategoryByRevenue.js"></script>
+        <script src="./static/Scripts/CategoryByQty.js"></script>
+        <script src="./static/Scripts/TopBrand.js"></script>
+        <script src="./static/Scripts/Platform.js"></script>
+
+        <script>
+            console.log("Starting main script...");
+            // Define the starting year and month
+            const startYear = 2021;
+            const startMonth = 1;
+            const endMonth = 12;
+
+            // Get the current year dynamically
+            const currentYear = new Date().getFullYear();
+
+            // Generate the list of JSON files dynamically up to the current year
+            const jsonFiles = [];
+
+            for (let year = startYear; year <= currentYear; year++) {
+                for (let month = startMonth; month <= endMonth; month++) {
+                    // Pad month with leading zero if needed
+                    const monthStr = month.toString().padStart(2, '0');
+                    const filePath = `./Json/${year}/data_month_${month}.json`;
+                    jsonFiles.push(filePath);
+                }
+            }
+            console.log("Generated JSON file paths: ", jsonFiles);
+
+            // Function to fetch all JSON files and combine the data
+            async function fetchData() {
+                let combinedData = [];
+                for (const file of jsonFiles) {
+                    try{
+                        const response = await fetch(file);
+                        if (!response.ok) {
+                        throw new Error(`Failed to fetch ${file}: ${response.statusText}`);
+                        
                     }
+                    const data = await response.json();
+                    combinedData = combinedData.concat(data);
+                }catch(error) {
+                    console.error('Error fetching ${file}:', error.message);
                 }
+            }    
+            return combinedData;
+        }
 
-                // Populate brand dropdown
-                brandDropdown.nextElementSibling.innerHTML = '';
-                brands.forEach(brand => {
-                    const option = document.createElement('a');
-                    option.className = 'dropdown-item';
-                    option.href = '#';
-                    option.textContent = brand;
-                    brandDropdown.nextElementSibling.appendChild(option);
-                });
+            // Fetch and process the data
+            fetchData().then(data => {
+                    console.log("Data received: ", data);   
 
-                // Populate outlet dropdown
-                outletDropdown.nextElementSibling.innerHTML = '';
-                outlets.forEach(outlet => {
-                    const option = document.createElement('a');
-                    option.className = 'dropdown-item';
-                    option.href = '#';
-                    option.textContent = outlet;
-                    option.setAttribute('data-value', outlet); // Adding a data attribute for outlet
-                    outletDropdown.nextElementSibling.appendChild(option);
-                });
+                    // Find the most recent date from the data
+                    const latestDate = new Date(Math.max(...data.map(item => new Date(item.Date))));
 
-                // Populate month dropdown
-                monthDropdown.nextElementSibling.innerHTML = '';
-                const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-                monthNames.forEach((month, index) => {
-                    const option = document.createElement('a');
-                    option.className = 'dropdown-item';
-                    option.href = '#';
-                    option.textContent = month;
-                    option.setAttribute('data-value', index + 1); // Adding a data attribute for month index
-                    monthDropdown.nextElementSibling.appendChild(option);
-                });
+                    // Format the date as "Updated until: Month Day, Year"
+                    const options = { year: 'numeric', month: 'long', day: 'numeric' };
+                    const formattedDate = latestDate.toLocaleDateString(undefined, options);
 
-                const updateCharts = () => {
-                    const selectedYears = [...document.querySelectorAll('#yearDropdown + .dropdown-menu a.active')].map(option => parseInt(option.textContent));
-                    const selectedMonths = [...document.querySelectorAll('#monthDropdown + .dropdown-menu a.active')].map(option => parseInt(option.getAttribute('data-value')));
-                    const selectedOutlets = [...document.querySelectorAll('#outletDropdown + .dropdown-menu a.active')].map(option => option.getAttribute('data-value'));
-                    const selectedBrands = [...document.querySelectorAll('#brandDropdown + .dropdown-menu a.active')].map(option => option.textContent);
+                    // Update the "Updated until" indicator
+                    document.getElementById('update-indicator').textContent = `Updated until: ${formattedDate}`;
 
-                    console.log("Selected Years:", selectedYears);
-                    console.log("Selected Months:", selectedMonths);
-                    console.log("Selected Outlets:", selectedOutlets);
-                    console.log("Selected Brands:", selectedBrands);
+                    const years = [...new Set(data.map(item => new Date(item.Date).getFullYear()))];
+                    const months = [...new Set(data.map(item => new Date(item.Date).getMonth() + 1))];
+                    const outlets = [...new Set(data.map(item => item.Outlet))];
+                    const brands = [...new Set(data.map(item => item.Brand))];
 
-                    const filteredData = data.filter(item => 
-                        (selectedYears.length === 0 || selectedYears.includes(new Date(item.Date).getFullYear())) &&
-                        (selectedMonths.length === 0 || selectedMonths.includes(new Date(item.Date).getMonth() + 1)) &&
-                        (selectedOutlets.length === 0 || selectedOutlets.includes(item.Outlet)) &&
-                        (selectedBrands.length === 0 || selectedBrands.includes(item.Brand))
-                    );
+                    const yearDropdown = document.getElementById('yearDropdown');
+                    const monthDropdown = document.getElementById('monthDropdown');
+                    const outletDropdown = document.getElementById('outletDropdown');
+                    const brandDropdown = document.getElementById('brandDropdown');
 
-                    const filteredDataForLineChart = data.filter(item =>
-                        (selectedYears.length === 0 || selectedYears.includes(new Date(item.Date).getFullYear())) &&
-                        (selectedOutlets.length === 0 || selectedOutlets.includes(item.Outlet)) &&
-                        (selectedBrands.length === 0 || selectedBrands.includes(item.Brand))
-                    );
-
-                    console.log("Filtered Data:", filteredData);
-
-                    // Update Pie chart
-                    updatePieChart(filteredData, selectedOutlets);
-
-                    // Update Line Chart without filtering Months
-                    updateLineChart(filteredDataForLineChart, selectedOutlets);
-
-                    // Update Category Rank by Revenue chart
-                    updateCategoryByRevenueChart(filteredData, selectedOutlets);
-
-                    // Update Category Rank by Qty chart
-                    updateCategoryByQtyChart(filteredData, selectedOutlets);
-
-                    // Update Brand chart
-                    updateTopBrandChart(filteredData, selectedOutlets);
-                    
-                    // Update Platform chart
-                    updatePlatformChart(filteredData, selectedOutlets);
-                    
-                    // Update HeatMap
-                    updateHeatMap(filteredData);                    
-
-
-                };
-
-                document.querySelectorAll('#yearDropdown + .dropdown-menu a').forEach(item => {
-                    item.addEventListener('click', function() {
-                        document.querySelectorAll('#yearDropdown + .dropdown-menu a').forEach(option => option.classList.remove('active'));
-                        item.classList.add('active');
-                        updateCharts();
+                    // Populate year dropdown
+                    yearDropdown.nextElementSibling.innerHTML = '';
+                    years.forEach(year => {
+                        const option = document.createElement('a');
+                        option.className = 'dropdown-item';
+                        option.href = '#';
+                        option.textContent = year;
+                        yearDropdown.nextElementSibling.appendChild(option);
                     });
-                });
-
-                document.querySelectorAll('#brandDropdown + .dropdown-menu a').forEach(item => {
-                    item.addEventListener('click', function() {
-                        item.classList.toggle('active');
-                        updateCharts();
-                    });
-                });
-
-                document.querySelectorAll('#outletDropdown + .dropdown-menu a').forEach(item => {
-                    item.addEventListener('click', function() {
-                        item.classList.toggle('active');
-                        updateCharts();
-                    });
-                });
-
-                document.querySelectorAll('#monthDropdown + .dropdown-menu a').forEach(item => {
-                    item.addEventListener('click', function() {
-                        item.classList.toggle('active');
-                        updateCharts();
-                    });
-                });
-
-                document.getElementById('resetButton').addEventListener('click', function() {
-                    document.querySelectorAll('#yearDropdown + .dropdown-menu a').forEach(option => option.classList.remove('active'));
+                    // Set default year to 2024
                     if (years.includes(2024)) {
                         const defaultYear = Array.from(yearDropdown.nextElementSibling.children).find(option => option.textContent === '2024');
                         if (defaultYear) {
                             defaultYear.classList.add('active');
                         }
                     }
-                    
-                    document.querySelectorAll('#brandDropdown + .dropdown-menu a').forEach(option => option.classList.remove('active'));
-                    document.querySelectorAll('#outletDropdown + .dropdown-menu a').forEach(option => option.classList.remove('active'));
-                    document.querySelectorAll('#monthDropdown + .dropdown-menu a').forEach(option => option.classList.remove('active'));
 
-                    updateCharts();
+                    // Populate brand dropdown
+                    brandDropdown.nextElementSibling.innerHTML = '';
+                    brands.forEach(brand => {
+                        const option = document.createElement('a');
+                        option.className = 'dropdown-item';
+                        option.href = '#';
+                        option.textContent = brand;
+                        brandDropdown.nextElementSibling.appendChild(option);
+                    });
+
+                    // Populate outlet dropdown
+                    outletDropdown.nextElementSibling.innerHTML = '';
+                    outlets.forEach(outlet => {
+                        const option = document.createElement('a');
+                        option.className = 'dropdown-item';
+                        option.href = '#';
+                        option.textContent = outlet;
+                        option.setAttribute('data-value', outlet); // Adding a data attribute for outlet
+                        outletDropdown.nextElementSibling.appendChild(option);
+                    });
+
+                    // Populate month dropdown
+                    monthDropdown.nextElementSibling.innerHTML = '';
+                    const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+                    monthNames.forEach((month, index) => {
+                        const option = document.createElement('a');
+                        option.className = 'dropdown-item';
+                        option.href = '#';
+                        option.textContent = month;
+                        option.setAttribute('data-value', index + 1); // Adding a data attribute for month index
+                        monthDropdown.nextElementSibling.appendChild(option);
+                    });
+
+                    const updateCharts = () => {
+                        const selectedYears = [...document.querySelectorAll('#yearDropdown + .dropdown-menu a.active')].map(option => parseInt(option.textContent));
+                        const selectedMonths = [...document.querySelectorAll('#monthDropdown + .dropdown-menu a.active')].map(option => parseInt(option.getAttribute('data-value')));
+                        const selectedOutlets = [...document.querySelectorAll('#outletDropdown + .dropdown-menu a.active')].map(option => option.getAttribute('data-value'));
+                        const selectedBrands = [...document.querySelectorAll('#brandDropdown + .dropdown-menu a.active')].map(option => option.textContent);
+
+                        console.log("Selected Years:", selectedYears);
+                        console.log("Selected Months:", selectedMonths);
+                        console.log("Selected Outlets:", selectedOutlets);
+                        console.log("Selected Brands:", selectedBrands);
+
+                        const filteredData = data.filter(item => 
+                            (selectedYears.length === 0 || selectedYears.includes(new Date(item.Date).getFullYear())) &&
+                            (selectedMonths.length === 0 || selectedMonths.includes(new Date(item.Date).getMonth() + 1)) &&
+                            (selectedOutlets.length === 0 || selectedOutlets.includes(item.Outlet)) &&
+                            (selectedBrands.length === 0 || selectedBrands.includes(item.Brand))
+                        );
+
+                        const filteredDataForLineChart = data.filter(item =>
+                            (selectedYears.length === 0 || selectedYears.includes(new Date(item.Date).getFullYear())) &&
+                            (selectedOutlets.length === 0 || selectedOutlets.includes(item.Outlet)) &&
+                            (selectedBrands.length === 0 || selectedBrands.includes(item.Brand))
+                        );
+
+                        console.log("Filtered Data:", filteredData);
+
+                        // Update Pie chart
+                        updatePieChart(filteredData, selectedOutlets);
+
+                        // Update Line Chart without filtering Months
+                        updateLineChart(filteredDataForLineChart, selectedOutlets);
+
+                        // Update Category Rank by Revenue chart
+                        updateCategoryByRevenueChart(filteredData, selectedOutlets);
+
+                        // Update Category Rank by Qty chart
+                        updateCategoryByQtyChart(filteredData, selectedOutlets);
+
+                        // Update Brand chart
+                        updateTopBrandChart(filteredData, selectedOutlets);
+                        
+                        // Update Platform chart
+                        updatePlatformChart(filteredData, selectedOutlets);
+                        
+                        // Update HeatMap
+                        updateHeatMap(filteredData);                    
+
+
+                    };
+
+                    document.querySelectorAll('#yearDropdown + .dropdown-menu a').forEach(item => {
+                        item.addEventListener('click', function() {
+                            document.querySelectorAll('#yearDropdown + .dropdown-menu a').forEach(option => option.classList.remove('active'));
+                            item.classList.add('active');
+                            updateCharts();
+                        });
+                    });
+
+                    document.querySelectorAll('#brandDropdown + .dropdown-menu a').forEach(item => {
+                        item.addEventListener('click', function() {
+                            item.classList.toggle('active');
+                            updateCharts();
+                        });
+                    });
+
+                    document.querySelectorAll('#outletDropdown + .dropdown-menu a').forEach(item => {
+                        item.addEventListener('click', function() {
+                            item.classList.toggle('active');
+                            updateCharts();
+                        });
+                    });
+
+                    document.querySelectorAll('#monthDropdown + .dropdown-menu a').forEach(item => {
+                        item.addEventListener('click', function() {
+                            item.classList.toggle('active');
+                            updateCharts();
+                        });
+                    });
+
+                    document.getElementById('resetButton').addEventListener('click', function() {
+                        document.querySelectorAll('#yearDropdown + .dropdown-menu a').forEach(option => option.classList.remove('active'));
+                        if (years.includes(2024)) {
+                            const defaultYear = Array.from(yearDropdown.nextElementSibling.children).find(option => option.textContent === '2024');
+                            if (defaultYear) {
+                                defaultYear.classList.add('active');
+                            }
+                        }
+                        
+                        document.querySelectorAll('#brandDropdown + .dropdown-menu a').forEach(option => option.classList.remove('active'));
+                        document.querySelectorAll('#outletDropdown + .dropdown-menu a').forEach(option => option.classList.remove('active'));
+                        document.querySelectorAll('#monthDropdown + .dropdown-menu a').forEach(option => option.classList.remove('active'));
+
+                        updateCharts();
+                    });
+
+                    updateCharts(); // Initial chart rendering with default selections
+                })
+                .catch(error => {
+                    console.error("Error fetching data: ", error);
                 });
 
-                updateCharts(); // Initial chart rendering with default selections
-            })
-            .catch(error => {
-                console.error("Error fetching data: ", error);
-            });
-
-        console.log("Main script executed...");
-    </script>
-</body>
-</html>
+            console.log("Main script executed...");
+        </script>
+    </body>
+    </html>
