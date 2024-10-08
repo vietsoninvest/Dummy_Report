@@ -11,7 +11,7 @@
 
     <!-- Password script -->
     <script>
-        function getHashCode(str, caseSensitive) {
+        function getHashCode(str, caseSensitive = true) {
             if (!caseSensitive) {
                 str = str.toLowerCase();
             }
@@ -22,8 +22,40 @@
             }
             return (hash & 0x7FFFFFFF);
         }
-
-        (function(_0x1d6159,_0x28e8c8){var _0x1d155e=_0x5504,_0xa58c54=_0x1d6159();while(!![]){try{var _0x20d7b7=parseInt(_0x1d155e(0x1b7))/0x1*(parseInt(_0x1d155e(0x1b6))/0x2)+parseInt(_0x1d155e(0x1b0))/0x3+-parseInt(_0x1d155e(0x1ad))/0x4*(parseInt(_0x1d155e(0x1a9))/0x5)+-parseInt(_0x1d155e(0x1af))/0x6+parseInt(_0x1d155e(0x1aa))/0x7+parseInt(_0x1d155e(0x1b3))/0x8+-parseInt(_0x1d155e(0x1ab))/0x9*(-parseInt(_0x1d155e(0x1b9))/0xa);if(_0x20d7b7===_0x28e8c8)break;else _0xa58c54['push'](_0xa58c54['shift']());}catch(_0x1e74a6){_0xa58c54['push'](_0xa58c54['shift']());}}}(_0x1b50,0x63d37));function password(){var _0x1542c0=_0x5504,_0x448516,_0xde47a4=0x0,_0xae0395=_0x1542c0(0x1b5);while(_0x448516!=_0xae0395&&_0xde47a4!=0x3){_0x448516=prompt('Please\x20input\x20the\x20password'),_0x448516==null&&(location[_0x1542c0(0x1b4)]=_0x1542c0(0x1a7)),_0x448516=getHashCode(_0x448516),console[_0x1542c0(0x1b2)](_0x1542c0(0x1b1)+_0x448516),_0x448516!=_0xae0395&&alert(_0x1542c0(0x1ac)),_0xde47a4++,console[_0x1542c0(0x1b2)]('Attempt\x20times:\x20'+_0xde47a4);}_0xde47a4>=0x3?(alert(_0x1542c0(0x1a8)),location['href']=_0x1542c0(0x1a7)):(alert(_0x1542c0(0x1b8)),document[_0x1542c0(0x1ae)]='Acme\x20De\x20La\x20Vie\x20Sales\x20Dashboard');}function _0x1b50(){var _0x36041a=['42825BtYmzz','Input\x20password\x20hash:\x20','log','831480nJjRmA','href','881896371','662ciEcTF','2189uxJEVZ','Logged\x20in','4059170YJLaqa','about:blank','Attempted\x20too\x20many\x20times,\x20locked','6595oMNJRf','2693362FjJglz','9JyfBFj','Password\x20wrong','2320McpvZY','title','2757270AflUhH'];_0x1b50=function(){return _0x36041a;};return _0x1b50();}function _0x5504(_0x1fadef,_0x320c70){var _0x1b5014=_0x1b50();return _0x5504=function(_0x550473,_0x272797){_0x550473=_0x550473-0x1a7;var _0x272ae0=_0x1b5014[_0x550473];return _0x272ae0;},_0x5504(_0x1fadef,_0x320c70);}password();    </script>
+    
+        function password() {
+            let attempt = 0;
+            const correctHash = 546220979;  // Hash for password "adlv@2024"
+    
+            while (attempt < 3) {
+                let input = prompt('Please input the password');
+                if (input === null) {
+                    location.href = 'about:blank';  // If the user cancels, close the page
+                    break;
+                }
+    
+                const hashedInput = getHashCode(input);
+                console.log('Input password hash:', hashedInput);
+    
+                if (hashedInput === correctHash) {
+                    alert('Logged in successfully');
+                    document.title = 'Acme De La Vie Sales Dashboard';
+                    break;
+                } else {
+                    alert('Password is incorrect');
+                }
+    
+                attempt++;
+                if (attempt >= 3) {
+                    alert('Too many failed attempts, locking page');
+                    location.href = 'about:blank';
+                }
+            }
+        }
+    
+        password();  // Call the password function on page load
+    </script>
+    
 
     <style>
         body {
