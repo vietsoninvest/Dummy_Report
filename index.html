@@ -59,7 +59,11 @@
     </style>
 </head>
 <body>
-    <div class="header">Acme De La Vie Sales Dashboard</div>
+    <div class="header">
+        Acme De La Vie Sales Dashboard
+        <div id="update-indicator" style="font-size: 14px; color: gray; margin-top: 5px;">
+            Updated until: <span id="last-updated-date"></span>    
+    </div>
     
     <div class="slicer-container">
         <div class="dropdown">
@@ -319,6 +323,11 @@
                 });
 
                 updateCharts(); // Initial chart rendering with default selections
+
+                // Last updated date
+                const lastUpdatedDate = "07/10/2024";
+                document.getElementById('last-updated-date').textContent = lastUpdatedDate;
+
             })
             .catch(error => {
                 console.error("Error fetching data: ", error);
