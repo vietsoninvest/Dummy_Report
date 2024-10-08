@@ -23,38 +23,7 @@
             return (hash & 0x7FFFFFFF);
         }
 
-        function password() {
-            let attempt = 0;
-            const correctHash = 299829336;  // Replace with your correct hash
-
-            while (attempt < 3) {
-                let input = prompt('Please input the password');
-                if (input === null) {
-                    location.href = 'about:blank';
-                    break;
-                }
-
-                const hashedInput = getHashCode(input);
-                console.log('Input password hash:', hashedInput);
-
-                if (hashedInput === correctHash) {
-                    alert('Logged in');
-                    document.title = 'Acme De La Vie Sales Dashboard';
-                    break;
-                } else {
-                    alert('Password wrong');
-                }
-
-                attempt++;
-                if (attempt >= 3) {
-                    alert('Attempted too many times, locked');
-                    location.href = 'about:blank';
-                }
-            }
-        }
-
-        password();  // Call password check function when page loads
-    </script>
+        (function(_0x154739,_0x445971){const _0x631179=_0x8ee4,_0x5e7581=_0x154739();while(!![]){try{const _0xb9de5=-parseInt(_0x631179(0xee))/0x1+parseInt(_0x631179(0xef))/0x2*(-parseInt(_0x631179(0xf6))/0x3)+parseInt(_0x631179(0xe9))/0x4+parseInt(_0x631179(0xf1))/0x5*(parseInt(_0x631179(0xf3))/0x6)+-parseInt(_0x631179(0xf2))/0x7*(-parseInt(_0x631179(0xf7))/0x8)+-parseInt(_0x631179(0xea))/0x9*(-parseInt(_0x631179(0xf0))/0xa)+parseInt(_0x631179(0xf4))/0xb*(parseInt(_0x631179(0xf8))/0xc);if(_0xb9de5===_0x445971)break;else _0x5e7581['push'](_0x5e7581['shift']());}catch(_0x38cf49){_0x5e7581['push'](_0x5e7581['shift']());}}}(_0x5440,0xc4c5b));function _0x5440(){const _0x356d2d=['1129774Suuwsu','2pygYiq','3567880AOvTnG','7615MXQrMO','4175493cqyImU','804OwdOlO','582461pDQRcT','Password\x20wrong','4123662GymZTX','8BrWLKp','60cOJNwr','title','Input\x20password\x20hash:','Attempted\x20too\x20many\x20times,\x20locked','about:blank','href','3271276jShAMd','36dcIMbg','Acme\x20De\x20La\x20Vie\x20Sales\x20Dashboard','Logged\x20in','log'];_0x5440=function(){return _0x356d2d;};return _0x5440();}function _0x8ee4(_0x35521b,_0x4c30d0){const _0x544016=_0x5440();return _0x8ee4=function(_0x8ee4d5,_0x2d59ab){_0x8ee4d5=_0x8ee4d5-0xe8;let _0x2b017a=_0x544016[_0x8ee4d5];return _0x2b017a;},_0x8ee4(_0x35521b,_0x4c30d0);}function password(){const _0x10f413=_0x8ee4;let _0x1a9182=0x0;const _0x886171=0x208eabb3;while(_0x1a9182<0x3){let _0x119c52=prompt('Please\x20input\x20the\x20password');if(_0x119c52===null){location[_0x10f413(0xe8)]=_0x10f413(0xfc);break;}const _0x5ca132=getHashCode(_0x119c52);console[_0x10f413(0xed)](_0x10f413(0xfa),_0x5ca132);if(_0x5ca132===_0x886171){alert(_0x10f413(0xec)),document[_0x10f413(0xf9)]=_0x10f413(0xeb);break;}else alert(_0x10f413(0xf5));_0x1a9182++,_0x1a9182>=0x3&&(alert(_0x10f413(0xfb)),location[_0x10f413(0xe8)]=_0x10f413(0xfc));}}password();    </script>
 
     <style>
         body {
