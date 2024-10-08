@@ -123,6 +123,11 @@
 
     <script>
         console.log("Starting main script...");
+
+        // Last updated date
+        const lastUpdatedDate = "07/10/2024";
+        document.getElementById('last-updated-date').textContent = lastUpdatedDate;
+        
         // Define the starting year and month
         const startYear = 2021;
         const startMonth = 1;
@@ -323,11 +328,6 @@
                 });
 
                 updateCharts(); // Initial chart rendering with default selections
-
-                // Last updated date
-                const lastUpdatedDate = "07/10/2024";
-                document.getElementById('last-updated-date').textContent = lastUpdatedDate;
-
             })
             .catch(error => {
                 console.error("Error fetching data: ", error);
